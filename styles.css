@@ -1,0 +1,23 @@
+.bg-container{
+    background-color: lightgrey;
+}
+#search-btn-div{
+    position:relative;
+}
+.bottom{
+    position:  absolute;
+    bottom: 0px;
+    margin-left: 20%;
+}
+.pod-img-div{
+    height:100px;
+    background-color: white;
+    text-align: center;
+}
+.pod-info-container{
+    padding:0px;
+}
+img{
+    max-width:100%;
+    max-height:100%;
+}
