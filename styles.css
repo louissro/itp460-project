@@ -25,3 +25,11 @@ a {
     all: unset;
 
 }
+.logo{
+    font-size:32px;
+    font-family: 'Oswald', sans-serif;
+    letter-spacing:1.5px;
+}
+.logo-USC{
+    color:#990000;
+}
