@@ -1,3 +1,35 @@
+<?php
+    
+    // establishing mySQL connection
+    $host = "304.itpwebdev.com";
+    $user = "itp460_team3";
+    $pass = "u$cItp2023";
+    $db = "itp460_team3";
+
+    $mysqli = new mysqli($host, $user, $pass, $db);
+
+    if ($mysqli->connect_errno) {
+        echo $mysqli->connect_error;
+        exit();
+    }
+
+    // submitting SQL query
+
+    //library drop down
+    $sql = "SELECT * FROM library;";
+
+    $results_library = $mysqli->query($sql);
+
+    if (!$results_library) {
+        echo $mysqli->error;
+        $mysqli->close();
+        exit();
+    }
+
+
+    // close mySQL connection
+    $mysqli->close();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +54,7 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                <a class="nav-link active" aria-current="page" href="index.php">Home</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="mission.html">Mission</a>
@@ -34,6 +66,8 @@
           </div>
         </div>
       </nav>
+
+      <form action = "index.php" method = "GET">
 
       <main>
         <!-- Book a Pod -->
@@ -87,9 +121,18 @@
                             <label for="select-date" class="form-label">Location</label>
                             <select class="form-select col-3" id="select-date" aria-label="Default select example">
                                 <option selected>Select Location</option>
-                                <option value="1">Leavy</option>
+                                <!-- <option value="1">Leavy</option>
                                 <option value="1">Doheny</option>
-                                <option value="1">SAL</option>
+                                <option value="1">SAL</option> -->
+
+
+                                <!-- display libraries  -->
+                                <?php while($row = $results_library->fetch_assoc()): ?>
+                                    <option value="<?php echo $row['id']; ?>">
+                                        <?php echo $row['libraryName']; ?>
+                                    </option>
+                                <?php endwhile; ?>
+
                             </select>
                         </div>
                         <div class="col-md-3" id="search-btn-div">
@@ -120,7 +163,7 @@
                           <div class="card">
                             <img class="card-img-top" src="classroom.jpeg" alt="" />
                             <div class="card-body">
-                                <h4 class="card-title pb-2">Leavy Library</h4>
+                                <h4 class="card-title pb-2">Leavey Library</h4>
                                 <p class="card-text m-0">Description: room with desk chairs and whiteboard.</p>
                                 <small class="text-success">36 rooms open</small>
                             </div>
