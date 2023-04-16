@@ -19,7 +19,13 @@ if ($conn->connect_error) {
 //Array of available times
 $available_times = ["10AM", "11AM", "12PM", "1PM", "2PM", "3PM", "4PM", "5PM", "6PM"];
 
-//For each room in this library - get row from reservations
+//Get library id
+//Get number of rooms - Fill [room] options with this
+//Get days up to one week from today - fill in [date] options with this 
+
+//When [room] is selected from drop down, allow user to click [date]
+
+//For $room in  $library - get row from reservations
 $sql = "SELECT library_id, date, time, room  FROM reservation WHERE library_id=1 AND room=1";
 $result = $conn->query($sql);
 
@@ -37,6 +43,7 @@ if ($result->num_rows > 0) {
 }
 
 //New available times, put into <option> tags for booking form
+//Times should only be clickable when room is chosen first
 echo implode(" ", $available_times);
 
 $conn->close();
