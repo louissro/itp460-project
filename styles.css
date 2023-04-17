@@ -1,5 +1,21 @@
-.bg-container{
-    background-color: lightgrey;
+:root{
+    --primary-text: #824101;
+    --secondary-text: #ac6620;
+    --primary-container-border: ##f4e9dc;
+    --misc-primary: #d5b392;
+    --misc-primary-border:#c59a6f;
+    --misc-secondary: #e4c2a3;
+    --misc-secondary-border: #C5A586;
+    --cardinal: #990000;
+}
+
+.primary-container{
+    background-color: #ffffff;
+    border: 2px solid #f4e9dc;
+}
+.save-color{
+    color: #f4e9dc;
+    color: #fffbf8;
 }
 #search-btn-div{
     position:relative;
@@ -23,7 +39,6 @@ img{
 }
 a {
     all: unset;
-
 }
 .logo{
     font-size:32px;
@@ -31,5 +46,35 @@ a {
     letter-spacing:1.5px;
 }
 .logo-USC{
-    color:#990000;
+    color: var(--cardinal);
+}
+.btn-primary{
+    background-color: var(--misc-primary);
+    border-color: var(--misc-primary-border);
+}
+
+.btn-primary:hover{
+    background-color: var(--misc-secondary);
+    border-color: var(--misc-secondary-border);
+}
+.navbar-nav .nav-link.active{
+    color: var(--primary-text);
+}
+.nav-link{
+    color: var(--secondary-text);
+    font-weight:500;
+}
+.nav-link:hover{
+    color: var(--primary-text);
+    font-weight:550;
+}
+section h2{
+    color: var(--primary-text); 
+}
+.card-title{
+    color: var(--secondary-text); 
+}
+label{
+    color: var(--secondary-text);
+    font-weight:450;
 }
