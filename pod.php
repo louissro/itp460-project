@@ -1,3 +1,35 @@
+<?php
+    
+    // establishing mySQL connection
+    $host = "304.itpwebdev.com";
+    $user = "itp460_team3";
+    $pass = 'u$cItp2023';
+    $db = "itp460_team3";
+
+    $mysqli = new mysqli($host, $user, $pass, $db);
+
+    if ($mysqli->connect_errno) {
+        echo $mysqli->connect_error;
+        exit();
+    }
+
+    // submitting SQL query
+
+    //library drop down
+    $sql = "SELECT * FROM library;";
+
+    $results_library = $mysqli->query($sql);
+
+    if (!$results_library) {
+        echo $mysqli->error;
+        $mysqli->close();
+        exit();
+    }
+
+
+    // close mySQL connection
+    $mysqli->close();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -111,7 +143,7 @@
             </div> <!-- row --> 
            </div> <!-- container --> 
 
-           <div class="container mt-5 p-3">
+           <!-- <div class="container mt-5 p-3">
             <h1>Booking Availability</h1>
             <div class = "row">
               <p><b>2/23/23 at 1:00PM</b></p>
@@ -171,20 +203,91 @@
 
                 </tbody>
               </table>
-            </div> <!-- row -->  
+            </div> 
 
             <div class="row">
               <div class = "col-11">
-
               </div>
               <div class="col-1">
                 <a href="bookings.php" class="btn btn-primary">Reserve</a>
-              </div>
-              
+              </div>  
             </div>
+           </div>  -->
 
+           <div class="container py-5">
+          <h2>Book This Pod</h2>
+          <div class="primary-container rounded p-5">
+            <form action="results.php" method="POST">
+              <div class="row">
+                <!-- Date -->
+                <div class="col-3">
+                    <label for="select-date" class="form-label">
+                      Date <span class="text-danger">*</span>
+                    </label>
+                    <select class="form-select col-3" id="select-date" name="date" aria-label="Default select example">
+                        <option value=""selected>Select Date</option>
+                        <option value="1">3/1</option>
+                        <option value="2">3/2</option>
+                        <option value="3">3/3</option>
+                        <option value="1">3/4</option>
+                        <option value="2">3/5</option>
+                        <option value="3">3/6</option>
+                        <option value="1">3/7</option>
+                        <option value="2">3/8</option>
+                        <option value="3">3/9</option>
+                        <option value="1">3/10</option>
+                        <option value="2">3/11</option>
+                        <option value="3">3/12</option>
+                        <option value="3">3/13</option>
+                        <option value="3/14">3/14</option>
+                    </select>
+                </div>
+                <!-- Time -->
+                <div class="col-3">
+                    <label for="select-time" class="form-label">
+                      Time <span class="text-danger">*</span>
+                    </label>
+                    <select class="form-select col-3" id="select-time" name="time" aria-label="Default select example">
+                        <option value="" selected>Select Time</option>
+                        <option value="1">6:00AM</option>
+                        <option value="2">6:30AM</option>
+                        <option value="3">7:00AM</option>
+                        <option value="4">7:30AM</option>
+                        <option value="5">8:00AM</option>
+                        <option value="6">8:30AM</option>
+                        <option value="7">9:00AM</option>
+                        <option value="8">9:30AM</option>
+                        <option value="9">10:00AM</option>
+                        <option value="10">10:30AM</option>
+                        <option value="11">11:00AM</option>
+                        <option value="12">11:30AM</option>
+                    </select>
+                </div>
+                <!-- Location -->
+                <div class="col-3">
+                    <label for="select-location" class="form-label">
+                      Location <span class="text-danger">*</span>
+                    </label>
+                    <select name="libraryName" class="form-select col-3" id="select-location" aria-label="Default select example">
+                        <option value="" selected>Select Location</option>
+                        <!-- display libraries  -->
+                        <?php while($row = $results_library->fetch_assoc()): ?>
+                          <option value="<?php echo $row['id']; ?>" selected>
+      									    <?php echo $row['libraryName']; ?>
+      								    </option>
+                        <?php endwhile; ?>
+                    </select>
 
-           </div> <!-- container --> 
+                </div>
+                <div class="col-2" id="search-btn-div">
+                  <!-- Change this to button when doing submitting form -->
+                  <button type="submit" class="btn bottom btn-primary">Reserve</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+           
       </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
