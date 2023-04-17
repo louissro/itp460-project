@@ -1,5 +1,5 @@
 <?php
-    
+
     // establishing mySQL connection
     $host = "304.itpwebdev.com";
     $user = "itp460_team3";
@@ -18,8 +18,8 @@
             FROM `library`
             WHERE 1=1";
 
-    if(isset($_GET['libraryName']) || trim($_GET['libraryName']) != ''){
-        $library_id = $_GET['libraryName'];
+    if(isset($_POST['libraryName']) || trim($POST['libraryName']) != ''){
+        $library_id = $_POST['libraryName'];
         $sql = $sql . " AND library.id = $library_id";
     } else {
       // testing to see why there's an undefined index
@@ -40,6 +40,7 @@
     // close mySQL connection
     $mysqli->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,89 +57,125 @@
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-          <a class="navbar-brand logo" href="index.php">Pod<span class="logo-USC">SC</span></a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="index.php">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="mission.html">Mission</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="bookings.html">Bookings</a>
-              </li>
-            </ul>
+    <nav class="navbar navbar-expand-lg primary-container">
+      <div class="container-fluid">
+        <a class="navbar-brand logo" href="index.php">Pod<span class="logo-USC">SC</span></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="index.php">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="mission.php">Mission</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="bookings.php">Bookings</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <!-- Book a Pod -->
+      <section>
+        <div class="container py-5">
+          <h2>Book a Pod</h2>
+          <div class="primary-container rounded p-5">
+            <form class="row">
+              <!-- Date -->
+              <div class="col-md-3">
+                <label for="select-date" class="form-label">Date</label>
+                <select class="form-select col-3" id="select-date" aria-label="Default select example">
+                  <option selected>
+                  <?php if(isset($_POST["date"])){
+                    if($_POST["date"] == ""){
+                      echo "any";
+                    }
+                    else{
+                    echo $_POST["date"];
+                    }
+                  }
+                  else{
+                    echo "any";
+                  }?>
+                  </option>
+                </select>
+              </div>
+              <!-- Time -->
+              <div class="col-md-3">
+                <label for="select-date" class="form-label">Time</label>
+                <select class="form-select col-3" id="select-date" aria-label="">
+                <option selected>
+                <?php if(isset($_POST["time"])){
+                    if($_POST["time"] == ""){
+                      echo "any";
+                    }
+                    else{
+                    echo $_POST["time"];
+                    }
+                  }
+                  else{
+                    echo "any";
+                  }?>
+                  </option>
+                </select>
+              </div>
+              <!-- Location -->
+              <div class="col-md-3">
+                <label for="select-location" class="form-label">Location</label>
+                <select class="form-select col-3" id="select-location" aria-label="Default select example">
+                  <option selected>
+                  <?php if(isset($_POST["libraryName"])){
+                    if($_POST["libraryName"] == ""){
+                      echo "any";
+                    }
+                    else{
+                     echo $_POST["libraryName"];
+                    }
+                  }
+                  else{
+                    echo "any";
+                  }?>
+                  </option>
+                </select>
+              </div>
+            </form>
           </div>
         </div>
-      </nav>
+      </section>
 
-      <main>
-        <!-- Book a Pod -->
-           <section>
-            <div class="container py-5">
-                <h2>Book a Pod</h2>
-                <div class="form-container bg-container rounded p-5">
-                    <form class="row">
-                        <!-- Date -->
-                        <div class="col-md-3">
-                            <label for="select-date" class="form-label">Date</label>
-                            <select class="form-select col-3" id="select-date" aria-label="Default select example">
-                                <option selected>3/4</option>
-                            </select>
-                        </div>
-                        <!-- Time -->
-                        <div class="col-md-3">
-                            <label for="select-date" class="form-label">Time</label>
-                            <select class="form-select col-3" id="select-date" aria-label="Default select example">
-                                <option selected>10:00AM</option>
-                            </select>
-                        </div>
-                        <!-- Location -->
-                        <div class="col-md-3">
-                            <label for="select-date" class="form-label">Location</label>
-                            <select class="form-select col-3" id="select-date" aria-label="Default select example">
-                                <option selected>Doheny</option>
-                            </select>
-                        </div>
-                    </form>
-                </div>
+      <?php while ($row = $results_library -> fetch_assoc()) : ?>
+
+<!-- Search Results -->
+<section>
+  <div class="container py-5">
+    <h2>Search Results</h2>
+    <div class="bg-light mt-3 rounded">
+      <div class="row py-5">
+        <a href="pod.html" class="col-md-3">
+          <div class="card">
+            <img class="card-img-top" src="classroom.jpeg" alt="" />
+            <div class="card-body">
+                <!-- <h4 class="card-title pb-2">Doheny Library</h4> -->
+                <h4 class="card-title pb-2"> <?php echo $row['libraryName'];?> </h4>
+                <!-- <p class="card-text m-0">Description: room with conference table and chairs.</p> -->
+                <p class="card-text m-0"> <?php echo $row['description'];?> </p>
+                <!-- <small class="text-success">53 rooms open</small> -->
+                <small class="text-success"> <?php echo $row['numOfPods'];?> rooms open</small>
             </div>
-            </section>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
-            <?php while ($row = $results_library -> fetch_assoc()) : ?>
-
-            <!-- Search Results -->
-            <section>
-              <div class="container py-5">
-                <h2>Search Results</h2>
-                <div class="bg-light mt-3 rounded">
-                  <div class="row py-5">
-                    <a href="pod.html" class="col-md-3">
-                      <div class="card">
-                        <img class="card-img-top" src="classroom.jpeg" alt="" />
-                        <div class="card-body">
-                            <!-- <h4 class="card-title pb-2">Doheny Library</h4> -->
-                            <h4 class="card-title pb-2"> <?php echo $row['libraryName'];?> </h4>
-                            <!-- <p class="card-text m-0">Description: room with conference table and chairs.</p> -->
-                            <p class="card-text m-0"> <?php echo $row['description'];?> </p>
-                            <!-- <small class="text-success">53 rooms open</small> -->
-                            <small class="text-success"> <?php echo $row['numOfPods'];?> rooms open</small>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            <?php endwhile ?>
-      </main>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<?php endwhile ?>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
 </html>

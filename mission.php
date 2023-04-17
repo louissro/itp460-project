@@ -38,22 +38,22 @@
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg primary-container">
         <div class="container-fluid">
-          <a class="navbar-brand logo" href="index.html">Pod<span class="logo-USC">SC</span></a>
+          <a class="navbar-brand logo" href="index.php">Pod<span class="logo-USC">SC</span></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="index.html">Home</a>
+                <a class="nav-link" aria-current="page" href="index.php">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="mission.html">Mission</a>
+                <a class="nav-link active" href="mission.php">Mission</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="bookings.html">Bookings</a>
+                <a class="nav-link" href="bookings.php">Bookings</a>
               </li>
             </ul>
           </div>
