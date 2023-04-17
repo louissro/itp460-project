@@ -3,7 +3,7 @@
     // establishing mySQL connection
     $host = "304.itpwebdev.com";
     $user = "itp460_team3";
-    $pass = "u$cItp2023";
+    $pass = 'u$cItp2023';
     $db = "itp460_team3";
 
     $mysqli = new mysqli($host, $user, $pass, $db);
@@ -47,7 +47,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand logo" href="index.html">Pod<span class="logo-USC">SC</span></a>
+            <a class="navbar-brand logo" href="index.php">Pod<span class="logo-USC">SC</span></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -67,7 +67,7 @@
         </div>
       </nav>
 
-      <form action = "index.php" method = "GET">
+      <form action = "results.php" method = "GET">
 
       <main>
         <!-- Book a Pod -->
@@ -119,8 +119,8 @@
                         <!-- Location -->
                         <div class="col-md-3">
                             <label for="select-date" class="form-label">Location</label>
-                            <select class="form-select col-3" id="select-date" aria-label="Default select example">
-                                <option selected>Select Location</option>
+                            <select name="libraryName" class="form-select col-3" id="select-date" aria-label="Default select example">
+                                <option value="" selected>Select Location</option>
                                 <!-- <option value="1">Leavy</option>
                                 <option value="1">Doheny</option>
                                 <option value="1">SAL</option> -->
@@ -136,12 +136,14 @@
                             </select>
                         </div>
                         <div class="col-md-3" id="search-btn-div">
-                            <a href="results.html" class="col-6 btn bottom btn-primary">Search</a>
+                            <a href="results.php" class="col-6 btn bottom btn-primary">Search</a>
                         </div>
                     </form>
                 </div>
             </div>
             </section>
+
+            </form>
 
             <!-- Featured Pods -->
             <section>

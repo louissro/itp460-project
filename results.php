@@ -14,9 +14,19 @@
     }
 
     // submitting SQL query
+    $sql = "SELECT library.libraryName, library.description, library.numOfPods
+            FROM `library`
+            WHERE 1=1";
 
-    //library drop down
-    $sql = "SELECT * FROM library;";
+    if(isset($_GET['libraryName']) || trim($_GET['libraryName']) != ''){
+        $library_id = $_GET['libraryName'];
+        $sql = $sql . " AND library.id = $library_id";
+    } else {
+      // testing to see why there's an undefined index
+       echo 'hello';
+    }
+
+    $sql = $sql . ';';
 
     $results_library = $mysqli->query($sql);
 
@@ -48,14 +58,14 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-          <a class="navbar-brand logo" href="index.html">Pod<span class="logo-USC">SC</span></a>
+          <a class="navbar-brand logo" href="index.php">Pod<span class="logo-USC">SC</span></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="index.html">Home</a>
+                <a class="nav-link" aria-current="page" href="index.php">Home</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="mission.html">Mission</a>
@@ -101,6 +111,8 @@
             </div>
             </section>
 
+            <?php while ($row = $results_library -> fetch_assoc()) : ?>
+
             <!-- Search Results -->
             <section>
               <div class="container py-5">
@@ -111,9 +123,12 @@
                       <div class="card">
                         <img class="card-img-top" src="classroom.jpeg" alt="" />
                         <div class="card-body">
-                            <h4 class="card-title pb-2">Doheny Library</h4>
-                            <p class="card-text m-0">Description: room with conference table and chairs.</p>
-                            <small class="text-success">53 rooms open</small>
+                            <!-- <h4 class="card-title pb-2">Doheny Library</h4> -->
+                            <h4 class="card-title pb-2"> <?php echo $row['libraryName'];?> </h4>
+                            <!-- <p class="card-text m-0">Description: room with conference table and chairs.</p> -->
+                            <p class="card-text m-0"> <?php echo $row['description'];?> </p>
+                            <!-- <small class="text-success">53 rooms open</small> -->
+                            <small class="text-success"> <?php echo $row['numOfPods'];?> rooms open</small>
                         </div>
                       </div>
                     </a>
@@ -121,6 +136,8 @@
                 </div>
               </div>
             </section>
+
+            <?php endwhile ?>
       </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
