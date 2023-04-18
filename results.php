@@ -18,7 +18,7 @@
             FROM `library`
             WHERE 1=1";
 
-    if(isset($_POST['libraryName']) || trim($POST['libraryName']) != ''){
+    if(isset($_POST['libraryName']) || trim($_POST['libraryName']) != ''){
         $library_id = $_POST['libraryName'];
         $sql = $sql . " AND library.id = $library_id";
     } else {
