@@ -3,7 +3,7 @@
     // establishing mySQL connection
     $host = "304.itpwebdev.com";
     $user = "itp460_team3";
-    $pass = "u$cItp2023";
+    $pass = 'u$cItp2023';
     $db = "itp460_team3";
 
     $mysqli = new mysqli($host, $user, $pass, $db);
@@ -67,7 +67,7 @@
         </div>
       </nav>
 
-      <form action = "index.php" method = "GET">
+      <form action = "pod.php" method = "POST">
 
       <main>
         <!-- Book a Pod -->
@@ -118,8 +118,8 @@
                         </div>
                         <!-- Location -->
                         <div class="col-md-3">
-                            <label for="select-date" class="form-label">Location</label>
-                            <select class="form-select col-3" id="select-date" aria-label="Default select example">
+                            <label for="select-location" class="form-label">Location</label>
+                            <select class="form-select col-3" id="select-location" name="select_location" aria-label="Default select example">
                                 <option selected>Select Location</option>
                                 <!-- <option value="1">Leavy</option>
                                 <option value="1">Doheny</option>
@@ -136,7 +136,7 @@
                             </select>
                         </div>
                         <div class="col-md-3" id="search-btn-div">
-                            <a href="results.html" class="col-6 btn bottom btn-primary">Search</a>
+                            <button type="submit" class="col-6 btn bottom btn-primary">Search</button>
                         </div>
                     </form>
                 </div>

@@ -18,15 +18,11 @@
               LEFT JOIN library_features 
                 ON library.libraryFeatures = library_features.id 
               LEFT JOIN features 
-                ON library.libraryFeatures = features.id
-              LEFT JOIN library_features AS libraryfeat
-                ON library_features.featureID = features.id
-              LEFT JOIN library_features AS libraryfeat2
-                ON library_features.libraryID = library.id";
+                ON library.libraryFeatures = features.id";
 
 
-if (isset($_GET['select_location']) && trim($_GET['select_location']) != '') {
-  $select_location = $_GET['select_location'];
+if (isset($_POST['select_location']) && trim($_POST['select_location']) != '') {
+  $select_location = $_POST['select_location'];
   $sql = $sql . " WHERE library.id = $select_location";
 }
 
