@@ -5,6 +5,7 @@
    $pass = 'u$cItp2023';
    $db = "itp460_team3";
 
+
    $mysqli = new mysqli($host, $user, $pass, $db);
 
    if ($mysqli->connect_errno) {
@@ -12,37 +13,52 @@
        exit();
    }
 
-   // submitting SQL query
-
-   //library drop down
-   $sql = "SELECT * FROM library;";
-
-   $results_library = $mysqli->query($sql);
-
-   if (!$results_library) {
-       echo $mysqli->error;
-       $mysqli->close();
-       exit();
-   }
+  //  $toUser = $_POST['email'];
+  //  $toAdmin = "tanyachen54@gmail.com";
+  //  $subject = "PodSC Booking Confirmation";
+  //  $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+  //  $message = file_get_contents("email_template.html");
 
 
-   // close mySQL connection
-   $mysqli->close();
+//Import PHPMailer classes into the global namespace
+//These must be at the top of your script, not inside a function
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
-   // Include PHP of error if they need to submit another request for a different time.
+//Load Composer's autoloader
+require 'vendor/autoload.php';
 
-   // Email Confirmation: 
+//Create an instance; passing `true` enables exceptions
+$phpmailer = new PHPMailer();
 
-   $toUser = $_POST['email'];
-   $toAdmin = "tanyachen54@gmail.com";
-   $subject = "PodSC Booking Confirmation";
-   $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
-   $message = file_get_contents("email_template.html");
+try {
+    //Server settings
+    $phpmailer->isSMTP();
+    $phpmailer->Host = 'sandbox.smtp.mailtrap.io';
+    $phpmailer->SMTPAuth = true;
+    $phpmailer->Port = 2525;
+    $phpmailer->Username = 'b0b97d38f44b87';
+    $phpmailer->Password = '4955b6f7008913';
 
-   
-  //  mail($toUser, $subject, $message, $headers);
- ?>
 
+    //Recipients
+    $phpmailer->setFrom('from@example.com', 'Mailer');
+    $phpmailer->addAddress('ashleysol2001@gmail.com', 'Joe User'); 
+
+    //Content
+    $phpmailer->isHTML(true);                                  //Set email format to HTML
+    $phpmailer->Subject = 'Here is the subject';
+    $phpmailer->Body    = 'This is the HTML message body <b>in bold!</b>';
+    $phpmailer->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+    //Commenting this out for now to prevent email spam
+    // $phpmailer->send();
+    // echo 'Message has been sent';
+} catch (Exception $e) {
+    echo "Message could not be sent. Mailer Error: {$phpmailer->ErrorInfo}";
+}
+?>   
 <!DOCTYPE html>
 <html lang="en">
 <head>
