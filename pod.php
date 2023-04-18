@@ -1,35 +1,55 @@
 <?php
-    
-    // establishing mySQL connection
-    $host = "304.itpwebdev.com";
-    $user = "itp460_team3";
-    $pass = 'u$cItp2023';
-    $db = "itp460_team3";
 
-    $mysqli = new mysqli($host, $user, $pass, $db);
+  $host = "304.itpwebdev.com";
+  $user = "itp460_team3";
+  $pass = 'u$cItp2023';
+  $db = 'itp460_team3';
 
-    if ($mysqli->connect_errno) {
-        echo $mysqli->connect_error;
-        exit();
-    }
+  $mysqli = new mysqli($host, $user, $pass, $db);
 
-    // submitting SQL query
-
-    //library drop down
-    $sql = "SELECT * FROM library;";
-
-    $results_library = $mysqli->query($sql);
-
-    if (!$results_library) {
-        echo $mysqli->error;
-        $mysqli->close();
-        exit();
-    }
+  if ($mysqli->connect_errno) {
+    echo $mysqli->connect_error;
+    exit();
+  }
 
 
-    // close mySQL connection
+  $sql = "SELECT library.id, libraryName, description, location, feature, picture 
+            FROM library 
+              LEFT JOIN library_features 
+                ON library.libraryFeatures = library_features.id 
+              LEFT JOIN features 
+                ON library.libraryFeatures = features.id";
+
+
+if (isset($_POST['select_location']) && trim($_POST['select_location']) != '') {
+  $select_location = $_POST['select_location'];
+  $sql = $sql . " WHERE library.id = $select_location";
+}
+
+
+  $sql = $sql . ";";
+
+  $results_library = $mysqli->query($sql);
+
+  if (!$results_library) {
+    echo $mysqli->error;
     $mysqli->close();
+    exit();
+  }
+
+    $libraryName = '';
+    $description = '';
+    $feature = '';
+    $location = '';
+    while ($row = mysqli_fetch_array($results_library)) {
+      $libraryName =($row['libraryName']);
+      $description = ($row['description']);
+      $feature =($row['feature']);
+      $location =($row['location']);
+    }
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -79,7 +99,7 @@
 
       <main>
         <div class="container mt-5 p-3">
-            <h1>Doheny Library</h1>
+            <h1><?php echo $libraryName ?></h1>
             <div class = "row">
                 <div class = "col-sm-6">
                     <div class="row pt-4">
@@ -105,12 +125,12 @@
                         <div class="accordion-item">
                           <h2 class="accordion-header" id="headingOne">
                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                              About Doheny Library
+                              About <?php echo $libraryName ?>
                             </button>
                           </h2>
                           <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                              <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                              <?php echo $description ?>
                             </div>
                           </div>
                         </div>
@@ -122,7 +142,7 @@
                           </h2>
                           <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                              <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                            <?php echo $feature ?>
                             </div>
                           </div>
                         </div>
@@ -134,7 +154,7 @@
                           </h2>
                           <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                              <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                              <?php echo $location ?>
                             </div>
                           </div>
                         </div>
@@ -210,7 +230,8 @@
               </div>
               <div class="col-1">
                 <a href="bookings.php" class="btn btn-primary">Reserve</a>
-              </div>  
+              </div>
+              
             </div>
            </div>  -->
 
