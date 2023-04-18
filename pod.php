@@ -21,8 +21,8 @@
                 ON library.libraryFeatures = features.id";
 
 
-if (isset($_POST['select_location']) && trim($_POST['select_location']) != '') {
-  $select_location = $_POST['select_location'];
+if (isset($_GET['libraryID']) && trim($_GET['libraryID']) != '') {
+  $select_location = $_GET['libraryID'];
   $sql = $sql . " WHERE library.id = $select_location";
 }
 
