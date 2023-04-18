@@ -154,8 +154,8 @@
 <section>
   <div class="container py-5">
     <h2>Search Results</h2>
-    <div class="bg-light mt-3 rounded">
-      <div class="row py-5">
+    <div class="primary-container mt-3 rounded p-5">
+      <div class="row justify-content-around">
         <a href='pod.php?libraryID=<?php echo $row['id'];?>' class="col-md-3">
           <div class="card">
             <img class="card-img-top" src="classroom.jpeg" alt="" />
