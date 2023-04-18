@@ -18,7 +18,7 @@
             FROM `library`
             WHERE 1=1";
 
-    if(isset($_POST['libraryName']) || trim($_POST['libraryName']) != ''){
+    if(isset($_POST['libraryName']) || trim($POST['libraryName']) != ''){
         $library_id = $_POST['libraryName'];
         $sql = $sql . " AND library.id = $library_id";
     } else {
@@ -79,8 +79,6 @@
       </div>
     </nav>
 
-    <?php while ($row = $results_library -> fetch_assoc()) : ?>
-
     <main>
       <!-- Book a Pod -->
       <section>
@@ -136,7 +134,7 @@
                       echo "any";
                     }
                     else{
-                     echo $row['libraryName'];
+                     echo $_POST["libraryName"];
                     }
                   }
                   else{
@@ -150,6 +148,7 @@
         </div>
       </section>
 
+      <?php while ($row = $results_library -> fetch_assoc()) : ?>
 
 <!-- Search Results -->
 <section>
@@ -179,4 +178,5 @@
 </main>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
+</html>
 </html>
