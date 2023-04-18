@@ -79,6 +79,8 @@
       </div>
     </nav>
 
+  <?php while ($row = $results_library -> fetch_assoc()) : ?>
+
     <main>
       <!-- Book a Pod -->
       <section>
@@ -134,7 +136,7 @@
                       echo "any";
                     }
                     else{
-                     echo $_POST["libraryName"];
+                     echo $row['libraryName'];
                     }
                   }
                   else{
@@ -147,8 +149,6 @@
           </div>
         </div>
       </section>
-
-      <?php while ($row = $results_library -> fetch_assoc()) : ?>
 
 <!-- Search Results -->
 <section>
