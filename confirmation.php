@@ -5,7 +5,6 @@
    $pass = 'u$cItp2023';
    $db = "itp460_team3";
 
-
    $mysqli = new mysqli($host, $user, $pass, $db);
 
    if ($mysqli->connect_errno) {
@@ -13,12 +12,77 @@
        exit();
    }
 
-  //  $toUser = $_POST['email'];
-  //  $toAdmin = "tanyachen54@gmail.com";
-  //  $subject = "PodSC Booking Confirmation";
-  //  $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
-  //  $message = file_get_contents("email_template.html");
+  // CHECKING RESERVATION AVAILABILITY ---------------------------------
+  // User submits request --> Submit SQL Query
+  $sql = "SELECT reservation.id, reservation.date, reservation.library_id, reservation.time, reservation.room
+  FROM `reservation`
+  LEFT JOIN `library`
+  ON library.id = reservation.library_id
+  WHERE 1=1";
 
+  if (isset($_POST['date']) && trim($_POST['date']) != ''){
+    $date = $_POST['date'];
+    $sql = $sql . " AND date LIKE '%$date%'";
+  }
+
+  if (isset($_POST['time']) && trim($_POST['time']) != ''){
+    $time = $_POST['time'];
+    $sql = $sql . " AND time LIKE '%$time%'";
+  }
+
+  if (isset($_POST['libraryName']) && trim($_POST['libraryName']) != '') {
+    $libraryName = $_POST['libraryName'];
+    $sql = $sql . " AND library_id LIKE $libraryName";
+  }
+
+  $sql = $sql . ";";
+
+  
+  // --------------------------------------------
+  // Check if time is available:
+  // var count is pods taken
+  $count = 0;
+  // var assigned_pod 
+  $room;
+
+  // while loop through all rows in reservation table
+    // If library_id = i and time = i and date = i:
+      // count=+;
+
+  $results = $mysqli->query($sql);
+
+  if ($results == false){
+    echo $results->error;
+    $mysqli->close();
+    exit();
+  }
+
+  while($row = $results->fetch_assoc())
+  {
+    if($date == $row['date'] && $time == $row['time'] && $libraryName == $row['library_id']){
+      $count = $count + 1;
+    }
+  }
+
+  if ($count < 5){
+    // if count < 5:
+    // Assign pod number to be count+1
+    $room = $count + 1;
+
+    // Add to reservation table 
+    $insertSQL = "INSERT INTO reservation (date, library_id, time, room)
+    VALUES ('$date', $libraryName, '$time', $room);";
+
+    $insertResults = $mysqli->query($insertSQL);
+
+  } else{
+    // else:
+    // Error Message: Reserve another pod
+    echo "All pods for this location are booked at that time! Please reserve another day or time.";
+  }
+          
+
+  // SEND EMAIL -------------------------------------------------------
 
 //Import PHPMailer classes into the global namespace
 //These must be at the top of your script, not inside a function
@@ -111,22 +175,22 @@ try {
 
               <div class="d-flex justify-content-between">
                 <strong><span style="color:#ac6620;">Date</strong><span>
-                <span class="text-muted">2/03/23</span>
+                <span class="text-muted"><?php echo $date?></span>
               </div>
 
               <div class="d-flex justify-content-between">
               <strong><span style="color:#ac6620;">Time</strong><span>
-                <span class="text-muted">2:00PM</span>
+                <span class="text-muted"><?php echo $time?></span>
               </div>
 
               <div class="d-flex justify-content-between">
               <strong><span style="color:#ac6620;">Location</strong><span>
-                <span class="text-muted">Doheny Library</span>
+                <span class="text-muted"><?php echo $libraryName?></span>
               </div>
 
               <div class="d-flex justify-content-between">
               <strong><span style="color:#ac6620;">Pod Number</strong><span>
-                <span class="text-muted">5</span>
+                <span class="text-muted"><?php echo $room?></span>
               </div>
 
               <button class="btn btn-primary">All Bookings</button>
@@ -138,13 +202,7 @@ try {
        </div>
   </section>
 
-      <!-- <main>
-        <p>Language: <?php echo $_POST['language'];?></p>
-        <p>Country: <?php echo $_POST['country'];?></p>
-        <p>Pages: <?php echo $_POST['pages'];?></p>
 
-        <h1>You also received an email confirmation!</h1>
-      </main> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
 </html>

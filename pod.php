@@ -163,82 +163,10 @@ if (isset($_GET['libraryID']) && trim($_GET['libraryID']) != '') {
             </div> <!-- row --> 
            </div> <!-- container --> 
 
-           <!-- <div class="container mt-5 p-3">
-            <h1>Booking Availability</h1>
-            <div class = "row">
-              <p><b>2/23/23 at 1:00PM</b></p>
-            </div>
-            <div class = "row">
-              <table class = "table table-bordered">
-                <thead>
-                  <tr>
-                    <th scope="col">Time</th>
-                    <th scope="col">11:30AM</th>
-                    <th scope="col">12:00PM</th>
-                    <th scope="col">12:30PM</th>
-                    <th scope="col">1:00PM</th>
-                    <th scope="col">1:30PM</th>
-                    <th scope="col">2:00PM</th>
-                    <th scope="col">2:30PM</th>
-                    <th scope="col">3:00PM</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">Room 200</th>
-                    <td class="table-success">Free</td>
-                    <td class="table-secondary">Busy</td>
-                    <td class="table-success">Free</td>
-                    <td class="table-success">Free</td>
-                    <td class="table-secondary">Busy</td>
-                    <td class="table-success">Free</td>
-                    <td class="table-secondary">Busy</td>
-                    <td class="table-secondary">Busy</td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row">Room 201</th>
-                    <td class="table-secondary">Busy</td>
-                    <td class = "table-success">Free</td>
-                    <td class="table-secondary">Busy</td>
-                    <td class="table-secondary">Busy</td>
-                    <td class="table-success">Free</td>
-                    <td class="table-success">Free</td>
-                    <td class="table-secondary">Busy</td>
-                    <td class="table-secondary">Busy</td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row">Room 201</th>
-                    <td class="table-secondary">Busy</td>
-                    <td class = "table-success">Free</td>
-                    <td class="table-secondary">Busy</td>
-                    <td class="table-secondary">Busy</td>
-                    <td class="table-success">Free</td>
-                    <td class="table-success">Free</td>
-                    <td class="table-secondary">Busy</td>
-                    <td class="table-secondary">Busy</td>
-                  </tr>
-                  
-
-                </tbody>
-              </table>
-            </div> 
-
-            <div class="row">
-              <div class = "col-11">
-              </div>
-              <div class="col-1">
-                <a href="bookings.php" class="btn btn-primary">Reserve</a>
-              </div>
-              
-            </div>
-           </div>  -->
-
            <div class="container py-5">
           <h2>Book This Pod</h2>
           <div class="primary-container rounded p-5">
-            <form action="results.php" method="POST">
+            <form action="confirmation.php" method="POST">
               <div class="row">
                 <!-- Date -->
                 <div class="col-3">
@@ -247,20 +175,20 @@ if (isset($_GET['libraryID']) && trim($_GET['libraryID']) != '') {
                     </label>
                     <select class="form-select col-3" id="select-date" name="date" aria-label="Default select example">
                         <option value=""selected>Select Date</option>
-                        <option value="1">3/1</option>
-                        <option value="2">3/2</option>
-                        <option value="3">3/3</option>
-                        <option value="1">3/4</option>
-                        <option value="2">3/5</option>
-                        <option value="3">3/6</option>
-                        <option value="1">3/7</option>
-                        <option value="2">3/8</option>
-                        <option value="3">3/9</option>
-                        <option value="1">3/10</option>
-                        <option value="2">3/11</option>
-                        <option value="3">3/12</option>
-                        <option value="3">3/13</option>
-                        <option value="3/14">3/14</option>
+                        <option value="5/1">5/1</option>
+                        <option value="5/2">5/2</option>
+                        <option value="5/3">5/3</option>
+                        <option value="5/4">5/4</option>
+                        <option value="5/5">5/5</option>
+                        <option value="5/6">5/6</option>
+                        <option value="5/7">5/7</option>
+                        <option value="5/8">5/8</option>
+                        <option value="5/9">5/9</option>
+                        <option value="5/10">5/10</option>
+                        <option value="5/11">5/11</option>
+                        <option value="5/12">5/12</option>
+                        <option value="5/13">5/13</option>
+                        <option value="5/14">5/14</option>
                     </select>
                 </div>
                 <!-- Time -->
@@ -270,18 +198,18 @@ if (isset($_GET['libraryID']) && trim($_GET['libraryID']) != '') {
                     </label>
                     <select class="form-select col-3" id="select-time" name="time" aria-label="Default select example">
                         <option value="" selected>Select Time</option>
-                        <option value="1">6:00AM</option>
-                        <option value="2">6:30AM</option>
-                        <option value="3">7:00AM</option>
-                        <option value="4">7:30AM</option>
-                        <option value="5">8:00AM</option>
-                        <option value="6">8:30AM</option>
-                        <option value="7">9:00AM</option>
-                        <option value="8">9:30AM</option>
-                        <option value="9">10:00AM</option>
-                        <option value="10">10:30AM</option>
-                        <option value="11">11:00AM</option>
-                        <option value="12">11:30AM</option>
+                        <option value="6:00AM">6:00AM</option>
+                        <option value="6:30AM">6:30AM</option>
+                        <option value="7:00AM">7:00AM</option>
+                        <option value="7:30AM">7:30AM</option>
+                        <option value="8:00AM">8:00AM</option>
+                        <option value="8:30AM">8:30AM</option>
+                        <option value="9:00AM">9:00AM</option>
+                        <option value="9:30AM">9:30AM</option>
+                        <option value="10:00AM">10:00AM</option>
+                        <option value="10:30AM">10:30AM</option>
+                        <option value="11:00AM">11:00AM</option>
+                        <option value="11:30AM">11:30AM</option>
                     </select>
                 </div>
                 <!-- Location -->
@@ -290,13 +218,10 @@ if (isset($_GET['libraryID']) && trim($_GET['libraryID']) != '') {
                       Location <span class="text-danger">*</span>
                     </label>
                     <select name="libraryName" class="form-select col-3" id="select-location" aria-label="Default select example">
-                        <option value="" selected>Select Location</option>
+                        <option value="" disabled>Select Location</option>
+                        <option value="<?php echo $select_location;?>" selected><?php echo $libraryName ?></option>
                         <!-- display libraries  -->
-                        <?php while($row = $results_library->fetch_assoc()): ?>
-                          <option value="<?php echo $row['id']; ?>" selected>
-      									    <?php echo $row['libraryName']; ?>
-      								    </option>
-                        <?php endwhile; ?>
+                        
                     </select>
 
                 </div>
