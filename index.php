@@ -146,9 +146,9 @@ $mysqli->close();
       <section>
         <div class="container py-5">
           <h2>Featured Pods</h2>
-          <div class="primary-container mt-3 rounded">
-            <div class="row justify-content-around py-5">
-              <div class="col-md-3">
+          <div class="primary-container mt-3 rounded p-5">
+            <div class="row justify-content-around">
+              <a href='pod.php?libraryID=<?php echo 1; ?>' class="col-md-3">
                 <div class="card">
                   <img class="card-img-top" src="classroom.jpeg" alt="" />
                   <div class="card-body">
@@ -157,8 +157,8 @@ $mysqli->close();
                     <small class="text-success">53 rooms open</small>
                   </div>
                 </div>
-              </div>
-              <div class="col-md-3">
+              </a>
+              <a href='pod.php?libraryID=<?php echo 3; ?>' class="col-md-3">
                 <div class="card">
                   <img class="card-img-top" src="classroom.jpeg" alt="" />
                   <div class="card-body">
@@ -167,19 +167,20 @@ $mysqli->close();
                     <small class="text-success">36 rooms open</small>
                   </div>
                 </div>
-              </div>
-              <div class="col-md-3">
+              </a>
+              <a href='pod.php?libraryID=<?php echo 9; ?>' class="col-md-3">
                 <div class="card">
                   <img class="card-img-top" src="classroom.jpeg" alt="" />
                   <div class="card-body">
-                    <h4 class="card-title pb-2">Viterbi SAL</h4>
+                    <h4 class="card-title pb-2">Annenberg Digital Media Lab</h4>
                     <p class="card-text m-0">Description: open table, chairs, and whiteboard.</p>
                     <small class="text-success">10 rooms open</small>
                   </div>
                 </div>
-              </div>
+              </a>
             </div>
           </div>
+        </div>
         </div>
       </section>
     </main>
