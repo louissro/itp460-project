@@ -32,12 +32,6 @@ if (isset($_GET['id']) && trim($_GET['id']) != '') {
   exit();
 }
 
-//  $toUser = $_POST['email'];
-//  $toAdmin = "tanyachen54@gmail.com";
-//  $subject = "PodSC Booking Confirmation";
-//  $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
-//  $message = file_get_contents("email_template.html");
-
 
 //Import PHPMailer classes into the global namespace
 //These must be at the top of your script, not inside a function
@@ -67,8 +61,13 @@ try {
 
   //Content
   $phpmailer->isHTML(true);                                  //Set email format to HTML
-  $phpmailer->Subject = 'Here is the subject';
-  $phpmailer->Body    = 'This is the HTML message body <b>in bold!</b>';
+  $phpmailer->Subject = 'PodSC: Booking Confirmation';
+  $phpmailer->Body    = 'Hello <?php echo $name ?>,
+  <br>
+  Thank you for booking with PodSC. We have confirmed your reservation for Pod <?php echo $room ?> in 
+  <?php echo $libraryName ?> on <?php echo $date ?> at <?php echo $time ?>.
+  <br>
+  Please let us know if you have any questions. Thank you!';
   $phpmailer->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
   //Commenting this out for now to prevent email spam
