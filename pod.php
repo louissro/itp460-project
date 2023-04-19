@@ -13,14 +13,14 @@ if ($mysqli->connect_errno) {
 }
 
 if (isset($_GET['libraryID']) && trim($_GET['libraryID']) != '') {
-  $select_location = $_GET['libraryID'];
+  $libraryID = $_GET['libraryID'];
   $sql = "SELECT library.id, libraryName, description, location, feature, picture 
   FROM library 
     LEFT JOIN library_features 
       ON library.libraryFeatures = library_features.id 
     LEFT JOIN features 
       ON library.libraryFeatures = features.id
-    WHERE library.id = $select_location";
+    WHERE library.id = $libraryID";
   $results_library = $mysqli->query($sql);
   $row = mysqli_fetch_array($results_library);
   $libraryName = ($row['libraryName']);
@@ -156,7 +156,7 @@ if (isset($_GET['libraryID']) && trim($_GET['libraryID']) != '') {
     <div class="container py-5">
       <h2>Book This Pod</h2>
       <div class="primary-container rounded p-5">
-        <form action="results.php" method="POST">
+        <form action="book.php" method="POST">
           <div class="row">
             <!-- Date -->
             <div class="col-3">
@@ -199,7 +199,7 @@ if (isset($_GET['libraryID']) && trim($_GET['libraryID']) != '') {
                 <option value="9">10:00AM</option>
                 <option value="10">10:30AM</option>
                 <option value="11">11:00AM</option>
-                <option value="12">11:30AM</option>
+                <option value="11:30AM">11:30AM</option>
               </select>
             </div>
             <!-- Location -->
@@ -207,8 +207,8 @@ if (isset($_GET['libraryID']) && trim($_GET['libraryID']) != '') {
               <label for="select-location" class="form-label">
                 Location <span class="text-danger">*</span>
               </label>
-              <select name="libraryName" class="form-select col-3" id="select-location" aria-label="Default select example">
-                <option value="<?php echo $select_location ?>" selected><?php echo $libraryName ?></option>
+              <select name="libraryID" class="form-select col-3" id="select-location" aria-label="Default select example">
+                <option value="<?php echo $libraryID ?>" selected><?php echo $libraryName ?></option>
               </select>
 
             </div>

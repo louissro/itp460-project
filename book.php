@@ -4,7 +4,35 @@ to confirmation.php where booking details are displayed and email is sent.
 Booking details from this page are received from pod.php. -->
 
 
-<!-- TODO: Receive booking details from pod.php -->
+<?php
+$host = "304.itpwebdev.com";
+$user = "itp460_team3";
+$pass = 'u$cItp2023';
+$db = 'itp460_team3';
+
+$mysqli = new mysqli($host, $user, $pass, $db);
+
+if ($mysqli->connect_errno) {
+  echo $mysqli->connect_error;
+  exit();
+}
+if (isset($_POST['libraryID']) && trim($_POST['libraryID']) != '') {
+  $libraryID = $_POST['libraryID'];
+  $date = $_POST['date'];
+  $time = $_POST['time'];
+  $sql = "SELECT library.id, libraryName 
+    FROM library
+      WHERE library.id = $libraryID";
+  $results_library = $mysqli->query($sql);
+  $row = mysqli_fetch_array($results_library);
+  $libraryName = ($row['libraryName']);
+} else {
+  echo "something went wrong, try again.";
+  echo $mysqli->error;
+  $mysqli->close();
+  exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -55,15 +83,15 @@ Booking details from this page are received from pod.php. -->
                 <hr class="new1">
                 <div class="d-flex justify-content-between">
                   <strong><span style="color:#ac6620;">Date</strong><span>
-                    <span class="text-muted">2/03/23</span>
+                    <span class="text-muted"><?php echo $date ?></span>
                 </div>
                 <div class="d-flex justify-content-between">
                   <strong><span style="color:#ac6620;">Time</strong><span>
-                    <span class="text-muted">2:00PM</span>
+                    <span class="text-muted"><?php echo $time ?></span>
                 </div>
                 <div class="d-flex justify-content-between">
                   <strong><span style="color:#ac6620;">Location</strong><span>
-                    <span class="text-muted">Doheny Library</span>
+                    <span class="text-muted"><?php echo $libraryName ?></span>
                 </div>
                 <div class="d-flex justify-content-between">
                   <strong><span style="color:#ac6620;">Pod Number</strong><span>
@@ -73,7 +101,7 @@ Booking details from this page are received from pod.php. -->
             </div>
             <div class="primary-container rounded mt-3 py-3 px-5">
               <!-- TODO:Add in booking detail variables to link -->
-              <form action="confirmation.php" method="POST">
+              <form action="confirmation.php?date=<?php echo $date?>?&time=<?php echo $time?>&library=<?php echo $libraryName?>&id=<?php echo $libraryID?>" method="POST">
                 <div class="form-group mb-2">
                   <label class="text-left" for="studentName">Full Name</label>
                   <input type="text" class="form-control" id="studentName" name="name" aria-describedby="emailHelp" placeholder="Enter name">
