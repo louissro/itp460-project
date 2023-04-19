@@ -16,18 +16,72 @@ if ($mysqli->connect_errno) {
   echo $mysqli->connect_error;
   exit();
 }
+
+// CHECKING RESERVATION AVAILABILITY ---------------------------------
+// User submits request --> Submit SQL Query
+$sql = "SELECT reservation.id, reservation.date, reservation.library_id, reservation.time, reservation.room
+  FROM `reservation`
+  LEFT JOIN `library`
+  ON library.id = reservation.library_id
+  WHERE 1=1";
+
+if (isset($_POST['date']) && trim($_POST['date']) != '') {
+  $date = $_POST['date'];
+  $sql = $sql . " AND date LIKE '%$date%'";
+}
+
+if (isset($_POST['time']) && trim($_POST['time']) != '') {
+  $time = $_POST['time'];
+  $sql = $sql . " AND time LIKE '%$time%'";
+}
+
 if (isset($_POST['libraryID']) && trim($_POST['libraryID']) != '') {
   $libraryID = $_POST['libraryID'];
-  $date = $_POST['date'];
-  $time = $_POST['time'];
-  $sql = "SELECT library.id, libraryName 
+  $sql = $sql . " AND library_id LIKE $libraryID";
+  $sql2 = "SELECT library.id, libraryName 
     FROM library
-      WHERE library.id = $libraryID";
-  $results_library = $mysqli->query($sql);
-  $row = mysqli_fetch_array($results_library);
-  $libraryName = ($row['libraryName']);
+    WHERE library.id = $libraryID";
+  $results_library = $mysqli->query($sql2);
+  $row_library = mysqli_fetch_array($results_library);
+  $libraryName = ($row_library['libraryName']);
+}
+
+$sql = $sql . ";";
+
+
+// --------------------------------------------
+// Check if time is available:
+// var count is pods taken
+$count = 0;
+// var assigned_pod 
+$room;
+
+// while loop through all rows in reservation table
+// If library_id = i and time = i and date = i:
+// count=+;
+
+$results = $mysqli->query($sql);
+
+if ($results == false) {
+  echo $mysqli->error;
+  $mysqli->close();
+  exit();
+}
+
+while ($row = $results->fetch_assoc()) {
+  if ($date == $row['date'] && $time == $row['time'] && $libraryID == $row['library_id']) {
+    $count = $count + 1;
+  }
+}
+
+if ($count < 5) {
+  // if count < 5:
+  // Assign pod number to be count+1
+  $room = $count + 1;
 } else {
-  echo "something went wrong, try again.";
+  // else:
+  // Error Message: Reserve another pod
+  echo "All pods for this location are booked at that time! Please reserve another day or time.";
   echo $mysqli->error;
   $mysqli->close();
   exit();
@@ -95,13 +149,13 @@ if (isset($_POST['libraryID']) && trim($_POST['libraryID']) != '') {
                 </div>
                 <div class="d-flex justify-content-between">
                   <strong><span style="color:#ac6620;">Pod Number</strong><span>
-                    <span class="text-muted">5</span>
+                    <span class="text-muted"><?php echo $room ?></span>
                 </div>
               </div>
             </div>
             <div class="primary-container rounded mt-3 py-3 px-5">
               <!-- TODO:Add in booking detail variables to link -->
-              <form action="confirmation.php?date=<?php echo $date?>?&time=<?php echo $time?>&library=<?php echo $libraryName?>&id=<?php echo $libraryID?>" method="POST">
+              <form action="confirmation.php?date=<?php echo $date ?>&time=<?php echo $time ?>&library=<?php echo $libraryName ?>&id=<?php echo $libraryID ?>&room=<?php echo $room?>" method="POST">
                 <div class="form-group mb-2">
                   <label class="text-left" for="studentName">Full Name</label>
                   <input type="text" class="form-control" id="studentName" name="name" aria-describedby="emailHelp" placeholder="Enter name">

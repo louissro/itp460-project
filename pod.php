@@ -165,20 +165,20 @@ if (isset($_GET['libraryID']) && trim($_GET['libraryID']) != '') {
               </label>
               <select class="form-select col-3" id="select-date" name="date" aria-label="Default select example">
                 <option value="" selected>Select Date</option>
-                <option value="1">3/1</option>
-                <option value="2">3/2</option>
-                <option value="3">3/3</option>
-                <option value="1">3/4</option>
-                <option value="2">3/5</option>
-                <option value="3">3/6</option>
-                <option value="1">3/7</option>
-                <option value="2">3/8</option>
-                <option value="3">3/9</option>
-                <option value="1">3/10</option>
-                <option value="2">3/11</option>
-                <option value="3">3/12</option>
-                <option value="3">3/13</option>
-                <option value="3/14">3/14</option>
+                <option value="5/1">5/1</option>
+                <option value="5/2">5/2</option>
+                <option value="5/3">5/3</option>
+                <option value="5/4">5/4</option>
+                <option value="5/5">5/5</option>
+                <option value="5/6">5/6</option>
+                <option value="5/7">5/7</option>
+                <option value="5/8">5/8</option>
+                <option value="5/9">5/9</option>
+                <option value="5/10">5/10</option>
+                <option value="5/11">5/11</option>
+                <option value="5/12">5/12</option>
+                <option value="5/13">5/13</option>
+                <option value="5/14">5/14</option>
               </select>
             </div>
             <!-- Time -->
@@ -188,24 +188,23 @@ if (isset($_GET['libraryID']) && trim($_GET['libraryID']) != '') {
               </label>
               <select class="form-select col-3" id="select-time" name="time" aria-label="Default select example">
                 <option value="" selected>Select Time</option>
-                <option value="1">6:00AM</option>
-                <option value="2">6:30AM</option>
-                <option value="3">7:00AM</option>
-                <option value="4">7:30AM</option>
-                <option value="5">8:00AM</option>
-                <option value="6">8:30AM</option>
-                <option value="7">9:00AM</option>
-                <option value="8">9:30AM</option>
-                <option value="9">10:00AM</option>
-                <option value="10">10:30AM</option>
-                <option value="11">11:00AM</option>
+                <option value="6:00AM">6:00AM</option>
+                <option value="6:30AM">6:30AM</option>
+                <option value="7:00AM">7:00AM</option>
+                <option value="7:30AM">7:30AM</option>
+                <option value="8:00AM">8:00AM</option>
+                <option value="8:30AM">8:30AM</option>
+                <option value="9:00AM">9:00AM</option>
+                <option value="9:30AM">9:30AM</option>
+                <option value="10:00AM">10:00AM</option>
+                <option value="10:30AM">10:30AM</option>
+                <option value="11:00AM">11:00AM</option>
                 <option value="11:30AM">11:30AM</option>
-              </select>
+                </select>
             </div>
             <!-- Location -->
             <div class="col-3">
-              <label for="select-location" class="form-label">
-                Location <span class="text-danger">*</span>
+              <label for="select-location" class="form-label">Location <span class="text-danger">*</span>
               </label>
               <select name="libraryID" class="form-select col-3" id="select-location" aria-label="Default select example">
                 <option value="<?php echo $libraryID ?>" selected><?php echo $libraryName ?></option>

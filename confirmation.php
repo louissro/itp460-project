@@ -17,8 +17,14 @@ if (isset($_GET['id']) && trim($_GET['id']) != '') {
   $date = $_GET['date'];
   $time = $_GET['time'];
   $libraryName = $_GET['library'];
+  $room = $_GET['room'];
   $name = $_POST['name'];
   $email = $_POST['email'];
+
+  // Add to reservation table 
+  $insertSQL = "INSERT INTO reservation (date, library_id, time, room, student_name, student_email)
+  VALUES ('$date', $libraryID, '$time', $room, '$name', '$email');";
+  $insertResults = $mysqli->query($insertSQL);
 } else {
   echo "something went wrong, try again.";
   echo $mysqli->error;
@@ -116,7 +122,7 @@ try {
         <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
           <div class="px-4 py-5">
 
-            <h2 class="mt-5 mb-5">Thanks for booking with PodSC, <?php echo $name?>! We have reserved you a spot and sent a confirmation email to <?php echo $email?>.</h2>
+            <h2 class="mt-5 mb-5">Thanks for booking with PodSC, <?php echo $name ?>! We have reserved you a spot and sent a confirmation email to <?php echo $email ?>.</h2>
 
             <div class="primary-container rounded p-5">
               <h3 style="color:#ac6620;">Booking Details</h3>
@@ -125,27 +131,28 @@ try {
 
                 <div class="d-flex justify-content-between">
                   <strong><span style="color:#ac6620;">Date</strong><span>
-                    <span class="text-muted"><?php echo $date?></span>
+                    <span class="text-muted"><?php echo $date ?></span>
                 </div>
 
                 <div class="d-flex justify-content-between">
                   <strong><span style="color:#ac6620;">Time</strong><span>
-                    <span class="text-muted"><?php echo $time?></span>
+                    <span class="text-muted"><?php echo $time ?></span>
                 </div>
 
                 <div class="d-flex justify-content-between">
                   <strong><span style="color:#ac6620;">Location</strong><span>
-                    <span class="text-muted"><?php echo $libraryName?></span>
+                    <span class="text-muted"><?php echo $libraryName ?></span>
                 </div>
 
                 <div class="d-flex justify-content-between">
                   <strong><span style="color:#ac6620;">Pod Number</strong><span>
-                    <span class="text-muted">5</span>
+                    <span class="text-muted"><?php echo $room ?></span>
                 </div>
 
-                <button class="btn btn-primary">All Bookings</button>
+                <form action="bookings.php?name=<?php echo $name ?>&email=<?php echo $email ?>">
+                  <button type="submit" class="btn btn-primary">All Bookings</button>
+                </form>
               </div>
-
             </div>
           </div>
         </div>
