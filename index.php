@@ -26,6 +26,36 @@ if (!$results_library) {
   exit();
 }
 
+//featured pods
+$sql2 = "SELECT * FROM library WHERE id = '1';";
+
+$results_library2 = $mysqli->query($sql2);
+
+if (!$results_library2) {
+  echo $mysqli->error;
+  $mysqli->close();
+  exit();
+}
+
+$sql3 = "SELECT * FROM library WHERE id = '3';";
+
+$results_library3 = $mysqli->query($sql3);
+
+if (!$results_library3) {
+  echo $mysqli->error;
+  $mysqli->close();
+  exit();
+}
+
+$sql4 = "SELECT * FROM library WHERE id = '9';";
+
+$results_library4 = $mysqli->query($sql4);
+
+if (!$results_library4) {
+  echo $mysqli->error;
+  $mysqli->close();
+  exit();
+}
 
 // close mySQL connection
 $mysqli->close();
@@ -141,6 +171,8 @@ $mysqli->close();
         </div>
       </div>
     </section>
+
+
     <!-- Featured Pods -->
     <section>
       <div class="container py-5">
@@ -149,31 +181,51 @@ $mysqli->close();
           <div class="row justify-content-around">
             <a href='pod.php?libraryID=<?php echo 1; ?>' class="col-md-3">
               <div class="card">
-                <img class="card-img-top" src="classroom.jpeg" alt="" />
+    <?php while ($row = $results_library2 -> fetch_assoc()) : ?>
+                <img class="card-img-top" src="images/Doheny_Inside.jpeg" alt="" />
                 <div class="card-body">
-                  <h4 class="card-title pb-2">Doheny Library</h4>
-                  <p class="card-text m-0">Description: room with conference table and chairs.</p>
-                  <small class="text-success">53 rooms open</small>
+                  <h4 class="card-title pb-2"> <?php echo $row['libraryName']; ?>  </p> </h4>
+                  <!-- <p class="card-text m-0">Description: Doheny Library is known for its traditional atmosphere and silent surroundings. Although the library is numerous floors, there are only a few halls designated for studying.  </p> -->
+
+                  <p class="card-text m-0"> <strong> Description: </strong> <?php echo $row['description']; ?>  </p>
+                  <small class="text-success"> <?php echo $row['numOfPods'] . ' room(s) open'; ?> </small>
                 </div>
+
+    <?php endwhile ?>
+
               </div>
             </a>
             <a href='pod.php?libraryID=<?php echo 3; ?>' class="col-md-3">
               <div class="card">
-                <img class="card-img-top" src="classroom.jpeg" alt="" />
+
+    <?php while ($row = $results_library3 -> fetch_assoc()) : ?>
+
+                <img class="card-img-top" src="images/Leavey_Inside.jpeg" alt="" />
                 <div class="card-body">
-                  <h4 class="card-title pb-2">Leavey Library</h4>
-                  <p class="card-text m-0">Description: room with desk chairs and whiteboard.</p>
-                  <small class="text-success">36 rooms open</small>
+                  <h4 class="card-title pb-2"> <?php echo $row['libraryName']; ?> </h4>
+                  <!-- <p class="card-text m-0">Description: Leavey Library provides a state-of-the-art learning environment for students and faculty at the University of Southern California.</p> -->
+
+                  <p class="card-text m-0"> <strong> Description: </strong> <?php echo $row['description']; ?>  </p>
+
+                  <small class="text-success"> <?php echo $row['numOfPods'] . ' room(s) open'; ?> </small>
                 </div>
+    <?php endwhile ?>
+
               </div>
             </a>
             <a href='pod.php?libraryID=<?php echo 9; ?>' class="col-md-3">
               <div class="card">
-                <img class="card-img-top" src="classroom.jpeg" alt="" />
+
+    <?php while ($row = $results_library4 -> fetch_assoc()) : ?>
+
+                <img class="card-img-top" src="images/Annenberg_2.jpeg" alt="" />
                 <div class="card-body">
-                  <h4 class="card-title pb-2">Annenberg Digital Media Lab</h4>
-                  <p class="card-text m-0">Description: open table, chairs, and whiteboard.</p>
-                  <small class="text-success">10 rooms open</small>
+                  <h4 class="card-title pb-2"> <?php echo $row['libraryName']; ?> </h4>
+                  <!-- <p class="card-text m-0">Description: The DML is a quiet area on the third floor of the Annenberg building dedicated to coworking.</p> -->
+
+                  <p class="card-text m-0"> <strong> Description: </strong> <?php echo $row['description']; ?>  </p>
+
+                  <small class="text-success"> <?php echo $row['numOfPods'] . ' room(s) open'; ?> </small>
                 </div>
               </div>
             </a>
@@ -182,6 +234,8 @@ $mysqli->close();
       </div>
       </div>
     </section>
+
+    <?php endwhile ?>
   </main>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
