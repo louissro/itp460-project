@@ -64,7 +64,7 @@ if ((isset($_GET['name']) && trim($_GET['name']) != '' && isset($_GET['email']) 
             <div class="row justify-content-around">
               <?php
               while ($row = $results->fetch_assoc()) { ?>
-                <div class="card col-md-3">
+                <div class="card col-md-3 mb-5 mx-3">
                   <img class="card-img-top" src="images/<?php echo $row['picture'] ?>" alt="<?php echo $row['libraryName'] ?>">
                   <div class="card-body">
                     <h4 class="card-title pb-2"><?php echo $row['libraryName'] ?></h4>
