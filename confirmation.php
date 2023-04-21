@@ -1,4 +1,11 @@
 <?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+require 'vendor/autoload.php';
+
 // establishing mySQL connection
 $host = "304.itpwebdev.com";
 $user = "itp460_team3";
@@ -32,17 +39,7 @@ if (isset($_GET['id']) && trim($_GET['id']) != '') {
   exit();
 }
 
-
-//Import PHPMailer classes into the global namespace
-//These must be at the top of your script, not inside a function
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-
-//Load Composer's autoloader
-require 'vendor/autoload.php';
-
-//Create an instance; passing `true` enables exceptions
+// Send confirmation email
 $phpmailer = new PHPMailer();
 
 try {
@@ -56,25 +53,53 @@ try {
 
 
   //Recipients
-  $phpmailer->setFrom('from@example.com', 'Mailer');
-  $phpmailer->addAddress('ashleysol2001@gmail.com', 'Joe User');
+  $phpmailer->setFrom('no-reply@podsc.com', 'Mailer');
+  $phpmailer->addAddress($email, $name);
 
   //Content
-  $phpmailer->isHTML(true);                                  //Set email format to HTML
+  $phpmailer->isHTML(true);
   $phpmailer->Subject = 'PodSC: Booking Confirmation';
-  $phpmailer->Body    = 'Hello <?php echo $name ?>,
-  <br>
-  Thank you for booking with PodSC. We have confirmed your reservation for Pod <?php echo $room ?> in 
-  <?php echo $libraryName ?> on <?php echo $date ?> at <?php echo $time ?>.
-  <br>
-  Please let us know if you have any questions. Thank you!';
+  $phpmailer->Body    = "<section style='width:80%; margin:100px auto; text-align:center'>
+  <h2 style='color:#824101;'>Thanks for booking with PodSC, $name! Your reservation details are below.</h2>
+
+  <div style='border:1px solid #ac6620'>
+    <h3 style='color:#ac6620;'>Booking Details</h3>
+    <div style='width:100%; height:1px; background-color:#ac6620'></div>
+    <div style='padding: 10px 0px'>  
+      <div style='padding-top:5px'>
+        <strong><span style='color:#ac6620;'>Date: </strong><span>
+        <strong><span class='text-muted'>$date</span><strong>
+      </div>
+
+      <div style='padding-top:5px'>
+      <strong><span style='color:#ac6620;'>Time: </strong><span>
+      <strong><span class='text-muted'>$time</span><strong>
+      </div>
+
+      <div style='padding-top:5px'>
+      <strong><span style='color:#ac6620;'>Location: </strong><span>
+      <strong><span class='text-muted'>$libraryName</span><strong>
+      </div>
+
+      <div style='padding-top:5px'>
+        <strong><span style='color:#ac6620;'>Pod Number: </strong><span>
+        <strong><span class='text-muted'>$room</span><strong>
+      </div>
+    </div>
+  </div>
+</section>";
   $phpmailer->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
   //Commenting this out for now to prevent email spam
-  // $phpmailer->send();
-  // echo 'Message has been sent';
+  if ($phpmailer->send()) {
+    //email send
+  } else {
+    echo $phpmailer->ErrorInfo;
+    exit();
+  }
 } catch (Exception $e) {
   echo "Message could not be sent. Mailer Error: {$phpmailer->ErrorInfo}";
+  exit();
 }
 ?>
 <!DOCTYPE html>
@@ -150,7 +175,7 @@ try {
 
                 <a href="bookings.php?name=<?php echo $name ?>&email=<?php echo $email ?>">
                   <button type="submit" class="btn btn-primary">All Bookings</button>
-</a>
+                </a>
               </div>
             </div>
           </div>

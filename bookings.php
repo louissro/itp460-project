@@ -21,7 +21,7 @@ if ((isset($_GET['name']) && trim($_GET['name']) != '' && isset($_GET['email']) 
     $name = $_POST['name'];
     $email = $_POST['email'];
   }
-  $sql = "SELECT reservation.id, reservation.date, reservation.library_id, reservation.time, reservation.room, reservation.student_email, reservation.student_name, library.libraryName
+  $sql = "SELECT reservation.id, reservation.date, reservation.library_id, reservation.time, reservation.room, reservation.student_email, reservation.student_name, library.libraryName, library.picture
   FROM `reservation`
   LEFT JOIN `library`
   ON library.id = reservation.library_id
@@ -55,30 +55,34 @@ if ((isset($_GET['name']) && trim($_GET['name']) != '' && isset($_GET['email']) 
       </div>
     </div>
   </nav>
-  <section>
-    <div class="container py-5">
-      <h2><?php echo $name ?>'s Upcoming Reservations</h2>
-      <div class="primary-container mt-3 rounded p-5">
-        <div class="row justify-content-around">
-          <?php
-          while ($row = $results->fetch_assoc()) { ?>
-            <div class="card col-md-3">
-              <img class="card-img-top" src="classroom.jpeg" alt="" />
-              <div class="card-body">
-                <h4 class="card-title pb-2"><?php echo $row['libraryName'] ?></h4>
-                <p class="card-text m-0">Date: <?php echo $row['date'] ?></p>
-                <p class="card-text m-0">Time: <?php echo $row['time'] ?></p>
-                <p class="card-text">Pod Number: <?php echo $row['room'] ?></p>
-                <a href="" class="btn btn-block btn-danger">Cancel</a>
-              </div>
-            </div>
+  <div class="container-fluid">
+    <section>
+      <main>
+        <div class="container py-5">
+          <h2><?php echo $name ?>'s Upcoming Reservations</h2>
+          <div class="primary-container mt-3 rounded p-5">
+            <div class="row justify-content-around">
+              <?php
+              while ($row = $results->fetch_assoc()) { ?>
+                <div class="card col-md-3">
+                  <img class="card-img-top" src="images/<?php echo $row['picture'] ?>" alt="<?php echo $row['libraryName'] ?>">
+                  <div class="card-body">
+                    <h4 class="card-title pb-2"><?php echo $row['libraryName'] ?></h4>
+                    <p class="card-text m-0">Date: <?php echo $row['date'] ?></p>
+                    <p class="card-text m-0">Time: <?php echo $row['time'] ?></p>
+                    <p class="card-text">Pod Number: <?php echo $row['room'] ?></p>
+                    <a href="" class="btn btn-block btn-danger">Cancel</a>
+                  </div>
+                </div>
 
-          <?php }
-          ?>
+              <?php }
+              ?>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </section>
+      </main>
+    </section>
+  </div>
 <?php } else { ?>
   <!-- Start HTML -->
   <nav class="navbar navbar-expand-lg primary-container">
