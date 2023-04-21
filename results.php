@@ -14,7 +14,7 @@
     }
 
     // submitting SQL query
-    $sql = "SELECT library.id, library.libraryName, library.description, library.numOfPods
+    $sql = "SELECT library.id, library.libraryName, library.description, library.numOfPods, library.picture
             FROM `library`
             WHERE 1=1";
 
@@ -158,7 +158,14 @@
       <div class="row justify-content-around">
         <a href='pod.php?libraryID=<?php echo $row['id'];?>' class="col-md-3">
           <div class="card">
-            <img class="card-img-top" src="classroom.jpeg" alt="" />
+            <!-- <img class="card-img-top" src="classroom.jpeg" alt="" /> -->
+
+            <?php 
+
+            echo "<img src = 'images/{$row['picture']}' alt = '{$row['libraryName']}'>";
+
+            ?>
+
             <div class="card-body">
                 <!-- <h4 class="card-title pb-2">Doheny Library</h4> -->
                 <h4 class="card-title pb-2"> <?php echo $row['libraryName'];?> </h4>

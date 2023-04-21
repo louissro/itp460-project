@@ -106,7 +106,7 @@ $mysqli->close();
         <div class="container py-5">
           <h2>Book a Pod</h2>
           <div class="primary-container rounded p-5">
-            <form action="results.php" method="POST">
+            <form action="results.php" method="POST" onsubmit="return validateForm()">
               <div class="row">
                 <!-- Date -->
                 <div class="col-3">
@@ -170,6 +170,18 @@ $mysqli->close();
           </form>
         </div>
       </div>
+      <script>
+        function validateForm() {
+          var date = document.getElementById("select-date").value;
+          var time = document.getElementById("select-time").value;
+          var library = document.getElementById("select-location").value;
+          if (date == "" && time == "" && library == "") {
+            alert("Please select an option from at least one menu");
+            return false;
+          }
+        return true;
+        }
+</script>
     </section>
 
 
