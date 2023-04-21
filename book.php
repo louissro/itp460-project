@@ -154,7 +154,6 @@ if ($count < 5) {
               </div>
             </div>
             <div class="primary-container rounded mt-3 py-3 px-5">
-              <!-- TODO:Add in booking detail variables to link -->
               <form action="confirmation.php?date=<?php echo $date ?>&time=<?php echo $time ?>&library=<?php echo $libraryName ?>&id=<?php echo $libraryID ?>&room=<?php echo $room?>" method="POST">
                 <div class="form-group mb-2">
                   <label class="text-left" for="studentName">Full Name</label>

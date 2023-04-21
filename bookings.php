@@ -11,9 +11,16 @@ if ($mysqli->connect_errno) {
   exit();
 }
 
-if (isset($_GET['name']) && trim($_GET['name']) != '' && isset($_GET['email']) && trim($_GET['email']) != '') {
-  $name = $_GET['name'];
-  $email = $_GET['email'];
+if ((isset($_GET['name']) && trim($_GET['name']) != '' && isset($_GET['email']) && trim($_GET['email']) != '')
+  || (isset($_POST['name']) && trim($_POST['name']) != '' && isset($_POST['email']) && trim($_POST['email']) != '')
+) {
+  if (isset($_GET['name'])) {
+    $name = $_GET['name'];
+    $email = $_GET['email'];
+  } else {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+  }
   $sql = "SELECT reservation.id, reservation.date, reservation.library_id, reservation.time, reservation.room, reservation.student_email, reservation.student_name, library.libraryName
   FROM `reservation`
   LEFT JOIN `library`
@@ -50,7 +57,7 @@ if (isset($_GET['name']) && trim($_GET['name']) != '' && isset($_GET['email']) &
   </nav>
   <section>
     <div class="container py-5">
-      <h2><?php echo $name?>'s Upcoming Reservations</h2>
+      <h2><?php echo $name ?>'s Upcoming Reservations</h2>
       <div class="primary-container mt-3 rounded p-5">
         <div class="row justify-content-around">
           <?php
@@ -58,10 +65,10 @@ if (isset($_GET['name']) && trim($_GET['name']) != '' && isset($_GET['email']) &
             <div class="card col-md-3">
               <img class="card-img-top" src="classroom.jpeg" alt="" />
               <div class="card-body">
-                <h4 class="card-title pb-2"><?php echo $row['libraryName']?></h4>
-                <p class="card-text m-0">Date: <?php echo $row['date']?></p>
-                <p class="card-text m-0">Time: <?php echo $row['time']?></p>
-                <p class="card-text">Pod Number: <?php echo $row['room']?></p>
+                <h4 class="card-title pb-2"><?php echo $row['libraryName'] ?></h4>
+                <p class="card-text m-0">Date: <?php echo $row['date'] ?></p>
+                <p class="card-text m-0">Time: <?php echo $row['time'] ?></p>
+                <p class="card-text">Pod Number: <?php echo $row['room'] ?></p>
                 <a href="" class="btn btn-block btn-danger">Cancel</a>
               </div>
             </div>
@@ -98,7 +105,22 @@ if (isset($_GET['name']) && trim($_GET['name']) != '' && isset($_GET['email']) &
 
   <section>
     <div class="container py-5">
-      <h2>No Upcoming Reservations</h2>
+      <h3 style="color:#ac6620;">Enter your information to see your bookings.</h3>
+      <div class="primary-container rounded mt-3 py-3 px-5">
+        <form action="bookings.php" method="POST">
+          <div class="form-group mb-2">
+            <label class="text-left" for="studentName">Full Name</label>
+            <input type="text" class="form-control" id="studentName" name="name" aria-describedby="emailHelp" placeholder="Enter name">
+          </div>
+          <div class="form-group mb-2">
+            <label class="text-left" for="studentEmail">Email Address</label>
+            <input type="email" class="form-control" id="studentEmail" name="email" placeholder="Enter email">
+          </div>
+          <div class="form-group text-center justify-content-center">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
     </div>
   </section>
   <!-- END HTML -->
