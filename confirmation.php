@@ -53,7 +53,7 @@ try {
 
 
   //Recipients
-  $phpmailer->setFrom('no-reply@podsc.com', 'Mailer');
+  $phpmailer->setFrom('no-reply@podsc.com', 'PodSC');
   $phpmailer->addAddress($email, $name);
 
   //Content
