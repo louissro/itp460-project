@@ -13,8 +13,12 @@
     background-color: #ffffff;
     border: 2px solid #f4e9dc;
 }
+.secondary-container{
+    border: 1px solid #f1dfcb;
+    background-color: #eee3d6;
+}
 .save-color{
-    color: #f4e9dc;
+    color: #ffffff;
     color: #fffbf8;
 }
 #search-btn-div{

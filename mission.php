@@ -63,21 +63,21 @@
       <main>
         <div class="container-fluid body initiatives">
           <div class="row initiatives-header">
-            <h1 class="text-center" id="mission-section">
-              <strong>Our Mission</strong>
+            <h1 style='color:#824101' class="text-center" id="mission-section">
+              <strong >Our Mission</strong>
             </h1>
             <br />
             <br />
           </div>
     
           <div class="statement row">
-            <p class="text-center">
+            <p style="font-weight: 500; color:#ac6620;" class="text-center">
               PodSC’s mission is to minimize stress and maximize productivity with curated study pods made for you.
             </p>
           </div>
 
           <div class="row d-flex justify-content-center">
-            <div class="card white col-lg-4 col-sm-12">
+            <div class="card primary-container col-lg-4 col-sm-12">
               <div class="card-body">
                 <h4 class="card-title">
                   <strong>1. Find a Pod</strong>
@@ -90,7 +90,7 @@
               </div>
             </div>
 
-            <div class="card blue col-lg-4 col-sm-12">
+            <div class="card secondary-container col-lg-4 col-sm-12">
               <div class="card-body">
                 <h4 class="card-title">
                   <strong>2. Reserve the Pod</strong>
@@ -101,7 +101,7 @@
                 </p>
               </div>
             </div>
-            <div class="card white col-lg-4 col-sm-12">
+            <div class="card primary-container  col-lg-4 col-sm-12">
               <div class="card-body">
                 <h4 class="card-title">
                   <strong>3. Show up!</strong>
