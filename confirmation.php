@@ -148,9 +148,9 @@ try {
                     <span class="text-muted"><?php echo $room ?></span>
                 </div>
 
-                <form action="bookings.php?name=<?php echo $name ?>&email=<?php echo $email ?>">
+                <a href="bookings.php?name=<?php echo $name ?>&email=<?php echo $email ?>">
                   <button type="submit" class="btn btn-primary">All Bookings</button>
-                </form>
+</a>
               </div>
             </div>
           </div>

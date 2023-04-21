@@ -57,6 +57,15 @@ a {
     background-color: var(--misc-secondary);
     border-color: var(--misc-secondary-border);
 }
+.btn-danger{
+    background-color: var(--cardinal);
+    border-color: #830505;
+}
+
+.btn-danger:hover{
+    background-color: #830505;
+    border-color: var(--cardinal);
+}
 .navbar-nav .nav-link.active{
     color: var(--primary-text);
 }
