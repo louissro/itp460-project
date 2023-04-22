@@ -70,11 +70,19 @@ while ($row = mysqli_fetch_array($results_library)) {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap" rel="stylesheet">
   <style>
-    .carousel-inner img {
+    .item{
+      height: 400px;
+    }
+    .item img {
       width: 100%;
       /* Set width to 100% */
-      min-height: 200px;
+      height: 100%;
+      object-fit: cover;
+      float: left;
+
     }
+
+
 
     #accordionExample {
       padding-top: 25px;
@@ -114,38 +122,29 @@ while ($row = mysqli_fetch_array($results_library)) {
         <div class="col-sm-6">
           <div class="row pt-4">
             <!-- <img id = "giantphoto" src="https://play-lh.googleusercontent.com/IeNJWoKYx1waOhfWF6TiuSiWBLfqLb18lmZYXSgsH1fvb8v1IYiZr5aYWe0Gxu-pVZX3" alt="Name"> -->
-
             <?php echo "<img id = 'giantphoto' src = 'images/$picture' alt='$libraryName'";
-            ?>
-
+            ?> 
             <hr>
+            
+            <!-- <div class="ROW">
+                <div class="col-3 item">
+                  <?php echo "<img class = 'img-responsive thumbnail' style='width: 9em;' id = 'thumbnail1' src = 'images/$picture2' alt='$libraryName'";
+                  ?>
+                </div> 
+                <div class="col-3 item">
+                  <?php echo "<img class = 'img-responsive thumbnail' style='width: 9em;' id = 'thumbnail2' src = 'images/$picture3' alt='$libraryName'";
+                  ?>
+                </div>  
+                <div class="col-3 item">
+                  <?php echo "<img class = 'img-responsive thumbnail' style='width: 9em;' id = 'thumbnail3' src = 'images/$picture4' alt='$libraryName'";
+                  ?>
+                </div> 
+              </div>  -->
+              
           </div> <!-- row -->
-          <div class="row">
-            <div class="col">
-              <!-- <img class = "img-responsive thumbnail" style="width: 100%; height: 100%" id = "thumbnail1" src="https://play-lh.googleusercontent.com/IeNJWoKYx1waOhfWF6TiuSiWBLfqLb18lmZYXSgsH1fvb8v1IYiZr5aYWe0Gxu-pVZX3" alt="Name"> -->
+          
 
-              <?php echo "<img class = 'img-responsive thumbnail' style='width: 9em;' id = 'thumbnail1' src = 'images/$picture2' alt='$libraryName'";
-              ?>
-
-            </div> <!-- col -->
-            <div class="col">
-              <!-- <img class = "img-responsive thumbnail" style="width: 100%; height: 100%" id = "thumbnail2" src="https://play-lh.googleusercontent.com/IeNJWoKYx1waOhfWF6TiuSiWBLfqLb18lmZYXSgsH1fvb8v1IYiZr5aYWe0Gxu-pVZX3" alt="Name"> -->
-
-              <?php echo "<img class = 'img-responsive thumbnail' style='width: 9em;' id = 'thumbnail2' src = 'images/$picture3' alt='$libraryName'";
-              ?>
-
-            </div> <!-- col -->
-            <div class="col">
-              <!-- <img class = "img-responsive thumbnail" style="width: 100%; height: 100%" id = "thumbnail3" src="https://play-lh.googleusercontent.com/IeNJWoKYx1waOhfWF6TiuSiWBLfqLb18lmZYXSgsH1fvb8v1IYiZr5aYWe0Gxu-pVZX3" alt="Name"> -->
-
-              <?php echo "<img class = 'img-responsive thumbnail' style='width: 9em;' id = 'thumbnail3' src = 'images/$picture4' alt='$libraryName'";
-              ?>
-
-            </div> <!-- col -->
-          </div> <!-- row -->
-
-
-        </div> <!-- col-sm-8-->
+       </div> <!-- col-sm-6-->
         <div class="col-sm-6">
           <div class="accordion" id="accordionExample">
             <div class="accordion-item">
@@ -188,78 +187,6 @@ while ($row = mysqli_fetch_array($results_library)) {
         </div> <!-- col-sm-8-->
       </div> <!-- row -->
     </div> <!-- container -->
-
-    <!-- <div class="container mt-5 p-3">
-            <h1>Booking Availability</h1>
-            <div class = "row">
-              <p><b>2/23/23 at 1:00PM</b></p>
-            </div>
-            <div class = "row">
-              <table class = "table table-bordered">
-                <thead>
-                  <tr>
-                    <th scope="col">Time</th>
-                    <th scope="col">11:30AM</th>
-                    <th scope="col">12:00PM</th>
-                    <th scope="col">12:30PM</th>
-                    <th scope="col">1:00PM</th>
-                    <th scope="col">1:30PM</th>
-                    <th scope="col">2:00PM</th>
-                    <th scope="col">2:30PM</th>
-                    <th scope="col">3:00PM</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">Room 200</th>
-                    <td class="table-success">Free</td>
-                    <td class="table-secondary">Busy</td>
-                    <td class="table-success">Free</td>
-                    <td class="table-success">Free</td>
-                    <td class="table-secondary">Busy</td>
-                    <td class="table-success">Free</td>
-                    <td class="table-secondary">Busy</td>
-                    <td class="table-secondary">Busy</td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row">Room 201</th>
-                    <td class="table-secondary">Busy</td>
-                    <td class = "table-success">Free</td>
-                    <td class="table-secondary">Busy</td>
-                    <td class="table-secondary">Busy</td>
-                    <td class="table-success">Free</td>
-                    <td class="table-success">Free</td>
-                    <td class="table-secondary">Busy</td>
-                    <td class="table-secondary">Busy</td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row">Room 201</th>
-                    <td class="table-secondary">Busy</td>
-                    <td class = "table-success">Free</td>
-                    <td class="table-secondary">Busy</td>
-                    <td class="table-secondary">Busy</td>
-                    <td class="table-success">Free</td>
-                    <td class="table-success">Free</td>
-                    <td class="table-secondary">Busy</td>
-                    <td class="table-secondary">Busy</td>
-                  </tr>
-                  
-
-                </tbody>
-              </table>
-            </div> 
-
-            <div class="row">
-              <div class = "col-11">
-              </div>
-              <div class="col-1">
-                <a href="bookings.php" class="btn btn-primary">Reserve</a>
-              </div>
-              
-            </div>
-           </div>  -->
 
     <div class="container py-5">
       <h2>Book This Pod</h2>
