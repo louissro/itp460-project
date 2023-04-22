@@ -82,11 +82,61 @@ while ($row = mysqli_fetch_array($results_library)) {
 
     }
 
-
-
     #accordionExample {
       padding-top: 25px;
     }
+
+
+    .slider {
+      width: 100%;
+      max-width: 800px;
+      height: 350px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 15px;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 800px;
+      height: 350px;
+      position: absolute;
+      transition: all 0.5s;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .btn-slider {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      padding: 10px;
+      border: none;
+      border-radius: 50%;
+      z-index: 10px;
+      cursor: pointer;
+      background-color: #fff;
+      font-size: 18px;
+    }
+
+    .btn-slider:active {
+      transform: scale(1.1);
+    }
+
+    .btn-prev {
+      top: 45%;
+      left: 2%;
+    }
+
+    .btn-next {
+      top: 45%;
+      right: 2%;
+    }
+
   </style>
 </head>
 
@@ -120,28 +170,33 @@ while ($row = mysqli_fetch_array($results_library)) {
       <h1><?php echo $libraryName ?></h1>
       <div class="row">
         <div class="col-sm-6">
-          <div class="row pt-4">
-            <!-- <img id = "giantphoto" src="https://play-lh.googleusercontent.com/IeNJWoKYx1waOhfWF6TiuSiWBLfqLb18lmZYXSgsH1fvb8v1IYiZr5aYWe0Gxu-pVZX3" alt="Name"> -->
-            <?php echo "<img id = 'giantphoto' src = 'images/$picture' alt='$libraryName'";
-            ?> 
-            <hr>
-            
-            <!-- <div class="ROW">
-                <div class="col-3 item">
-                  <?php echo "<img class = 'img-responsive thumbnail' style='width: 9em;' id = 'thumbnail1' src = 'images/$picture2' alt='$libraryName'";
-                  ?>
-                </div> 
-                <div class="col-3 item">
-                  <?php echo "<img class = 'img-responsive thumbnail' style='width: 9em;' id = 'thumbnail2' src = 'images/$picture3' alt='$libraryName'";
-                  ?>
-                </div>  
-                <div class="col-3 item">
-                  <?php echo "<img class = 'img-responsive thumbnail' style='width: 9em;' id = 'thumbnail3' src = 'images/$picture4' alt='$libraryName'";
-                  ?>
-                </div> 
-              </div>  -->
-              
-          </div> <!-- row -->
+        <div class="slider">
+          <!-- slide 1 -->
+          <div class="slide">
+       
+           <img src="images/<?php echo $picture ?>"alt="" />
+          </div>
+
+          <!-- slide 2 -->
+          <div class="slide">
+           <img src="images/<?php echo $picture2 ?>" alt="" />
+
+          </div>
+
+          <!-- slide 3 -->
+          <div class="slide">
+            <img src="images/<?php echo $picture3 ?>" alt="" />
+          </div>
+
+          <!-- slide 4
+          <div class="slide">
+            <img src="https://source.unsplash.com/random?landscape,city" alt="" />
+          </div> -->
+
+          <!-- Control buttons -->
+          <button class="btn-slider btn-next">></button>
+          <button class="btn-slider btn-prev"><</button>
+        </div>
           
 
        </div> <!-- col-sm-6-->
@@ -257,6 +312,59 @@ while ($row = mysqli_fetch_array($results_library)) {
 
   </main>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+  <script>
+    const slides = document.querySelectorAll(".slide");
+
+// loop through slides and set each slides translateX
+slides.forEach((slide, indx) => {
+  slide.style.transform = `translateX(${indx * 100}%)`;
+});
+
+// select next slide button
+const nextSlide = document.querySelector(".btn-next");
+
+// current slide counter
+let curSlide = 0;
+// maximum number of slides
+let maxSlide = slides.length - 1;
+
+// add event listener and navigation functionality
+nextSlide.addEventListener("click", function () {
+  // check if current slide is the last and reset current slide
+  if (curSlide === maxSlide) {
+    curSlide = 0;
+  } else {
+    curSlide++;
+  }
+
+  //   move slide by -100%
+  slides.forEach((slide, indx) => {
+    slide.style.transform = `translateX(${100 * (indx - curSlide)}%)`;
+  });
+});
+
+// select next slide button
+const prevSlide = document.querySelector(".btn-prev");
+
+// add event listener and navigation functionality
+prevSlide.addEventListener("click", function () {
+  // check if current slide is the first and reset current slide to last
+  if (curSlide === 0) {
+    curSlide = maxSlide;
+  } else {
+    curSlide--;
+  }
+
+  //   move slide by 100%
+  slides.forEach((slide, indx) => {
+    slide.style.transform = `translateX(${100 * (indx - curSlide)}%)`;
+  });
+});
+
+    
+  </script>
 </body>
+
+
 
 </html>
