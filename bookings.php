@@ -71,7 +71,7 @@ if ((isset($_GET['name']) && trim($_GET['name']) != '' && isset($_GET['email']) 
                     <p class="card-text m-0">Date: <?php echo $row['date'] ?></p>
                     <p class="card-text m-0">Time: <?php echo $row['time'] ?></p>
                     <p class="card-text">Pod Number: <?php echo $row['room'] ?></p>
-                    <a href="" class="btn btn-block btn-danger">Cancel</a>
+                    <a href="delete.php?id=<?php echo $row['id']; ?>" class="delete btn btn-block btn-danger">Cancel</a>
                   </div>
                 </div>
 
@@ -151,6 +151,19 @@ if ((isset($_GET['name']) && trim($_GET['name']) != '' && isset($_GET['email']) 
 
 <body>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+  <script>
+
+    var deleteBtns = document.querySelector('.delete');
+    
+    for (var i=0; i < deleteBtns.length; i++) {
+      deleteBtns[i].onclick = function() {
+        return confirm('Are you sure you want to delete this reservation?');
+      }
+    }
+
+  </script>
+
 </body>
 
 </html>
