@@ -18,12 +18,10 @@
             FROM `library`
             WHERE 1=1";
 
-    if(isset($_POST['libraryName']) || trim($_POST['libraryName']) != ''){
+    if(isset($_POST['libraryName']) && trim($_POST['libraryName']) != ''){
         $library_id = $_POST['libraryName'];
         $sql = $sql . " AND library.id = $library_id";
-    } else {
-      // testing to see why there's an undefined index
-       echo 'hello';
+        echo $_POST['libraryName'];
     }
 
     $sql = $sql . ';';
@@ -35,7 +33,6 @@
         $mysqli->close();
         exit();
     }
-
 
     // close mySQL connection
     $mysqli->close();
@@ -78,8 +75,6 @@
         </div>
       </div>
     </nav>
-
-  <?php while ($row = $results_library -> fetch_assoc()) : ?>
 
     <main>
       <!-- Book a Pod -->
@@ -154,16 +149,17 @@
 <section>
   <div class="container py-5">
     <h2>Search Results</h2>
+
+    <?php while ($row = $results_library -> fetch_assoc()) : ?>
+
     <div class="primary-container mt-3 rounded p-5">
       <div class="row justify-content-around">
         <a href='pod.php?libraryID=<?php echo $row['id'];?>' class="col-md-3">
           <div class="card">
             <!-- <img class="card-img-top" src="classroom.jpeg" alt="" /> -->
 
-            <?php 
-
-            echo "<img src = 'images/{$row['picture']}' alt = '{$row['libraryName']}'>";
-
+            <?php
+                  echo "<img src = 'images/{$row['picture']}' alt = '{$row['libraryName']}'>";   
             ?>
 
             <div class="card-body">

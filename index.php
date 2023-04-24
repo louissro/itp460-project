@@ -170,7 +170,7 @@ $mysqli->close();
           </form>
         </div>
       </div>
-      <script>
+      <!-- <script>
         function validateForm() {
           var date = document.getElementById("select-date").value;
           var time = document.getElementById("select-time").value;
@@ -181,7 +181,7 @@ $mysqli->close();
           }
         return true;
         }
-</script>
+</script> -->
     </section>
 
 
