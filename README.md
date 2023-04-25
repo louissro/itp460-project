@@ -5,3 +5,8 @@ Instructions to open site:
 3. Open up MAMP and click START on the top right corner to start hosting locally
 4. Navigate to itp460-project folder (if not already there) and click index.php
 5. Feel free to navigate around and click on any of the available features and buttons
+
+Instructions to host this project elsewhere:
+1. Obtain a web domain name and web hosting plan
+2. Upload PHP files directly to the hosting server
+3. Open index.php
