@@ -150,10 +150,12 @@
   <div class="container py-5">
     <h2>Search Results</h2>
 
-    <?php while ($row = $results_library -> fetch_assoc()) : ?>
 
     <div class="primary-container mt-3 rounded p-5">
+
       <div class="row justify-content-around">
+      <?php while ($row = $results_library -> fetch_assoc()) : ?>
+
         <a href='pod.php?libraryID=<?php echo $row['id'];?>' class="col-md-3">
           <div class="card">
             <!-- <img class="card-img-top" src="classroom.jpeg" alt="" /> -->
@@ -172,12 +174,15 @@
             </div>
           </div>
         </a>
+        <?php endwhile ?>
+
       </div>
+
     </div>
+
   </div>
 </section>
 
-<?php endwhile ?>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
